@@ -1,11 +1,3 @@
-Lessons/
-node_modules/
-dist/
-.env
-.vscode/
-*.log
-*.tmp
-*.bak
 node_modules/
 Lessons/
 dist/
