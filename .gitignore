@@ -1,0 +1,95 @@
+node_modules/
+Lessons/
+dist/
+.env
+.DS_Store
+.idea/
+.vscode/
+# =========================
+# Node.js Essentials
+# =========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnpm-store/
+
+# =========================
+# Build / Compiled Output
+# =========================
+dist/
+build/
+out/
+tmp/
+temp/
+coverage/
+.nyc_output/
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+*.log.*
+
+# =========================
+# OS / Editor Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ/WebStorm
+.idea/
+
+# =========================
+# Runtime Data
+# =========================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Optional Caches
+# =========================
+.cache/
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+.vercel/
+
+# =========================
+# Misc
+# =========================
+*.tgz
+*.gz
+*.zip
+*.tar
+*.swp
+*.swo
+\
