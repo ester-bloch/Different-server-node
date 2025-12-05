@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {getAll,getWeather,create,getById,update} from '../controllers/city.js'
+import {getAll,getWeather,create,getById,update, getByName} from '../controllers/city.js'
 const router = express.Router()
 
 router.get('', (req, res) => {
@@ -9,6 +9,7 @@ router.get('', (req, res) => {
 router.get('/getWeather/:city',getWeather)
 router.get('/getAll',getAll)
 router.get('/byid/:id',getById)
+router.get('/getByName/:name',getByName )
 router.patch('/:id',update)
 router.post('',create)
 

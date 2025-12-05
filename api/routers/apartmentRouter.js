@@ -1,6 +1,6 @@
 import express from 'express'
 
-import{create,getAll, getByCity,getById,getByPriceLessThan1000,getByPriceEqualTo1000,getByPriceMoreThan1000,remove,update,getBedsLessThan4,getBedsMoreThan4,getByAdvertiser,getByCategory,} from '../controllers/apartment.js'
+import{create,getAll, getByCity,getById,getByPriceLessThan1000,getByPriceEqualTo1000,getByPriceMoreThan1000,remove,update,getBedsLessThan4,getBedsMoreThan4,getByAdvertiser,getByCategory, getByFilter,} from '../controllers/apartment.js'
 import { checkAuth } from '../middlewares.js'
 const router = express.Router()
 
@@ -14,6 +14,7 @@ router.patch('/update/:id',update)
 router.get('/getAll',getAll)
 router.get('/getByCity/:city',getByCity)
 router.get('/ById/:id',getById)
+router.post('/getByFilter',getByFilter)
 router.get('/getByPriceLessThan1000',getByPriceLessThan1000)
 router.get('/getByPriceEqualTo1000',getByPriceEqualTo1000)
 router.get('/getByPriceMoreThan1000',getByPriceMoreThan1000)

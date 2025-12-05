@@ -56,15 +56,14 @@ export const update = (req, res) => {
         })
 }
 export const getWeather = async (req, res) => {
-    const city = req.params.city; // הנחה שהעיר נשלחת כפרמטר ב-URL
-    const encodedCity = encodeURIComponent(city); // קידוד שם העיר
+    const city = req.params.city; 
+    const encodedCity = encodeURIComponent(city); 
     //const translated = await translate(city, { to: 'en' });
     //const cityNameInEnglish = translated.text;
-    const apiKey = process.env.WEATHER_API;// הכנס כאן את המפתח שלך
+    const apiKey = process.env.WEATHER_API;
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(url).then(async (response) => {
         const weatherData = response.data;
-        console.log(weatherData);
         res.json({
             "descriptionEnglish": weatherData.weather[0].description,
             "descriptionHebrew": (await translate(weatherData.weather[0].description, { to: 'he' })).text,
@@ -75,6 +74,23 @@ export const getWeather = async (req, res) => {
     })
 
 }
+export const getByName = async (req, res) => {
+    const { name } = req.params; // הנחה ששם העיר נשלח כפרמטר ב-URL
+    if (!name)
+        return res.status(400).send({ error: 'City name is required' });
+    try {
+        const city = await City.findOne({ name }).populate('apartments', 'name');
+
+        if (!city) {
+            return res.status(404).send({ error: 'City not found' });
+        }
+
+        res.status(200).send(city);
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
+}
+
 // export const update2 = (req, res) => {
 //     const { id } = req.params
 //     Dish.findByIdAndUpdate(id, req.body,).

@@ -7,7 +7,7 @@ export const create = async (req, res) => {
     const { name, description, category, city, advertiser, address, numbeds, more, price, picture } = req.body;
 
     // בדיקת קלט
-    if (!name ) {
+    if (!name) {
         return res.status(400).send({ error: "Missing required fields" });
     }
 
@@ -373,3 +373,37 @@ export const filterApartments = async (req, res) => {
         res.status(500).send({ error: err.message });
     }
 };
+
+export const getByFilter = async (req, res) => {
+    const searchCriteria = req.body;
+    console.log("searchCriteria: ", searchCriteria)
+    if (searchCriteria.$and.city) {
+        console.log("city: ", searchCriteria.$and.city)
+        const city = await City.findOne({ name: searchCriteria.$and.city });
+        if (city) {
+            searchCriteria.city = city._id; 
+            console.log(searchCriteria.city)
+        } else {
+            return res.status(404).json({ message: 'עיר לא נמצאה' });
+        }        
+    }
+    try {
+        const apartments = await Apartment.find(searchCriteria)
+            .populate({ path: 'category', select: 'name _id' })
+            .populate({ path: 'city', select: 'name _id' })
+            .populate({ path: 'advertiser', select: 'email phoneNumber phoneNumber2 _id' });
+    
+        // הוספת _id של העיר לכל דירה בתגובה
+        const response = apartments.map(apartment => ({
+            ...apartment.toObject(), // המרת האובייקט לדוגמה רגילה
+            cityId: searchCriteria.cityId // הוספת ה-ID של העיר לתגובה
+        }));
+    
+        res.status(200).json(response); // מחזירים את הדירות שנמצאו עם ה-ID של העיר
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'שגיאה בעת חיפוש הדירות', error: error.message });
+    }
+    
+};
+

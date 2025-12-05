@@ -27,19 +27,6 @@ mongoose.connect(`mongodb://localhost:27017/ApartmentDB`)
 
 app.use(bodyParser.json())
 
-
-/*
-params-חובה כמו 2/ מוגדר בפונקציה עם נקודותיים
-query- לא חובה לא מוגדר בפונקציה ?name=3&...
-body-נסתר
-*/
-// mongoose.connect(`mongodb://localhost:27017/DishesDB`)
-//     .then(() => {
-//         console.log('connect to mongoDB')
-//     })
-//     .catch(err => {
-//         console.error({ error: err.mongoose })
-//     })
 app.get('', (req, res) => {
     res.send('👍😁❤😍')
 })
